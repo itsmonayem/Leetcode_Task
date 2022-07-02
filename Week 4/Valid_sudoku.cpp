@@ -1,12 +1,15 @@
 class Solution {
 public:
     bool check_subBox(vector<vector<char>>&board, int a,int b){
-        map<char,int>mp;
+        vector<int>v(10,0);
         for(int i=a;i<a+3;i++){
             for(int j=b;j<b+3;j++){
-                if(board[i][j]!='.' && mp[board[i][j]]>=1)
-                    return false;
-                mp[board[i][j]]++;
+                if(board[i][j]!='.'){
+                    int x=(int)board[i][j]-'0';
+                    if(v[x]>0)
+                        return false;
+                    v[x]++;
+                }
             }
         }
         return true;
@@ -21,6 +24,7 @@ public:
             for(int j=0;j<9;j++){
                 if(board[i][j]!='.'){
                     int x=(int)board[i][j]-'0';
+                    //cout<<x<<endl;
 
                     if(horizontal[i][x]!=0){
                         check=false;
@@ -31,7 +35,6 @@ public:
                         check=false;
                         break;
                     }
-                    
                     horizontal[i][x]++;
                     vertical[j][x]++;
                 }
